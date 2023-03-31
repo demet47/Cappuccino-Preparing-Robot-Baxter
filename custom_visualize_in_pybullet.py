@@ -26,7 +26,7 @@ labels = ["time","left_s0","left_s1","left_e0","left_e1","left_w0","left_w1",\
             "right_w0","right_w1", "right_w2","right_gripper"]
 
 
-debug_Nline_ids = [] # to remove them when needed
+debug_line_ids = [] # to remove them when needed
 
 
 # visualize the demo trajectory:
