@@ -26,7 +26,8 @@ labels = ["time","left_s0","left_s1","left_e0","left_e1","left_w0","left_w1",\
             "right_w0","right_w1", "right_w2","right_gripper"]
 
 
-debug_line_ids = [] # to remove them when needed
+debug_
+Nline_ids = [] # to remove them when needed
 
 
 # visualize the demo trajectory:
@@ -85,10 +86,14 @@ sinus_trajectory = np.load('sinus_trajectory.npy')
 sinus_trajectory = [baxter.convert_to_joint_data(p, None) for p in sinus_trajectory]
 np.save('sinus_trajectory_joint',sinus_trajectory)
 
+trained_trajectory = np.load('trained_trajectory.npy')
+trained_trajectory = [baxter.convert_to_joint_data(p, None) for p in trained_trajectory]
+np.save('trained_trajectory_joint',trained_trajectory)
+
 
     
 dictionary = {"linear": linear_trajectory, "circular": circle_trajectory, "step":one_step_trajectory, "sinus": sinus_trajectory, "triangular": trajectory1
-                  , "polynomial": trajectory2, "impuls": trajectory3, "multi-step":trajectory4}
+                  , "polynomial": trajectory2, "impuls": trajectory3, "multi-step":trajectory4, "trained": trained_trajectory}
 
 
 flag = input("Do you want to demonstrate an input trajectory? (Y/N): ")
