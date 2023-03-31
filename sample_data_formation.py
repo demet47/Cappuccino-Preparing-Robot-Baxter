@@ -49,16 +49,17 @@ np.save('linear_trajectory',trajectory)
 
 # DATA FOR SINUS TRAJECTORY
 
-y = np.linspace(-1, 0, 200) 
+y = np.linspace(-0.5, 0, 200) 
 
 # Computing y as a function of x
 #from 0 to 0.6
 
 #0.5*sin(2*pi*y)
-x = [(0.5 * k + 0.25) for k in [math.sin(2 * math.pi * 4 * a) for a in y]]
+x = [(0.1 * k + 0.5) for k in [math.sin(2 * math.pi * 4 * a) for a in y]]
 trajectory = list(zip(x,y,z))
 
 np.save('sinus_trajectory',trajectory)
+
 
 
 
