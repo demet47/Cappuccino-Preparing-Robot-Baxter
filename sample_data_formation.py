@@ -6,6 +6,7 @@ import math
 
 z = [1] * 200
 
+#final y = 1.1, x = 0, z = 1
 
 
 # DATA FOR CIRCLE TRAJECTORY
@@ -30,7 +31,7 @@ np.save('circle_trajectory',trajectory)
 y = np.linspace(-1.1, 0, 200) 
 
 
-x = [0]* 66 + np.linspace(0,0.6,68).tolist() +  [0.6]*66
+x = [0]* 120 + np.linspace(0,1.1,30).tolist() +  [1.1]*20
 trajectory = list(zip(x,y,z))
 
 np.save('one_step_trajectory',trajectory)
@@ -39,9 +40,9 @@ np.save('one_step_trajectory',trajectory)
 
 # DATA FOR LINEAR TRAJECTORY
 
-y = np.linspace(-1.2, 0, 200) 
+y = np.linspace(-1.1, 0, 200) 
 
-x = y * 0.7 + [0.7]*200 
+x = - 1*y * 0.5 + [1.1]*200 
 trajectory = list(zip(x,y,z))
 
 np.save('linear_trajectory',trajectory)
@@ -49,14 +50,17 @@ np.save('linear_trajectory',trajectory)
 
 # DATA FOR SINUS TRAJECTORY
 
-y = np.linspace(-0.5, 0, 200) 
+y = np.linspace(-1.1, 0, 200) 
 
 # Computing y as a function of x
 #from 0 to 0.6
 
 #0.5*sin(2*pi*y)
-x = [(0.1 * k + 0.5) for k in [math.sin(2 * math.pi * 4 * a) for a in y]]
-trajectory = list(zip(x,y,z))
+prepend = [0.5]*70
+append = [(0.1 * k + 0.5) for k in [math.sin(2 * math.pi * 4 * a) for a in y[70:-30]]]
+final = [1.1]*30
+m = prepend + append
+trajectory = list(zip(m,y,z))
 
 np.save('sinus_trajectory',trajectory)
 
