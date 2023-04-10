@@ -8,11 +8,16 @@ import pdb
 import numpy as np
 import sys
 
+
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
+planeId=p.loadURDF("plane.urdf")
+tableId = p.loadURDF("table.urdf", [1,0,0.12], [0,0,1,1], globalScaling = 1.2)
+pos, orient = p.getBasePositionAndOrientation(tableId)
+p.resetBasePositionAndOrientation(tableId, pos, orient)
 p.setGravity(0,0,-9.81)
 p.setRealTimeSimulation(0)
-planeId=p.loadURDF("plane.urdf")
+
 
 baxter = Manipulator(p, "./baxter_common/baxter_description/urdf/toms_baxter.urdf", position=(0,0,0.9), ik_idx=20)
 baxter.add_debug_text()
@@ -99,14 +104,13 @@ if(flag == "N"):
 t_name = input("Please enter what trajectory to demonstrate: ", )
 
 
-
 print("visualizing the demonstration...")
 line_start=None
 trajectory = dictionary[t_name]
-baxter.set_joint_position(position=trajectory[0], t=0.1)
+baxter.set_joint_position(position=trajectory[0], t=1)
 for position_xyz in trajectory:
     #print("given position: ",position_xyz)
-    baxter.set_joint_position(position=position_xyz, t=0.1, sleep=False)
+    baxter.set_joint_position(position=position_xyz, t=1, sleep=False)
     #baxter.set_joint_position(position=position_xyz, t=0.005, sleep=False, traj=True)
     end_effector_position = baxter.get_end_effector_pose()
     #print("position robot reaches: ",end_effector_position)
