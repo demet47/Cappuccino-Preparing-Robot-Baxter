@@ -63,6 +63,7 @@ class Manipulator:
     def move_in_cartesian(self, position, orientation=None, t=1.0, sleep=False, ignore_force=False):
         N = int(t * 240)
         current_position = self.get_end_effector_pose()
+        joints_followed = []
         position_traj = np.linspace(current_position, position, N+1)[1:]
         for p_i in position_traj:
             target_joints = self._p.calculateInverseKinematics(
@@ -71,6 +72,9 @@ class Manipulator:
                 targetPosition=p_i,
                 targetOrientation=orientation)
             self.set_joint_position(target_joints, t=1/240, sleep=sleep)
+            joints_followed.append(self.get_joint_position())
+        return joints_followed
+
             
     def set_joint_position(self, position, velocity=None, t=None, sleep=False, traj=False):
         assert len(self.joints) > 0
@@ -172,3 +176,5 @@ class Manipulator:
                 targetPosition=position_xyz,
                 targetOrientation=orientation)
         
+    def change_orientation_of_link(self, torque, link):
+        self._p.applyExternalTorque(self.id, link, torque, self._p.LINK_FRAME)
