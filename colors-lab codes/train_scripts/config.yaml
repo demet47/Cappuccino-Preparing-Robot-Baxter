@@ -1,0 +1,41 @@
+save_folder: "save/deneme1"
+trainset_path: "./train_dataset.pt"
+testset_path: "./validate_dataset.pt"
+device: "cpu"
+# ---
+model: "cnmp"
+in_shape: [7,16]  # (d_x: time, x-y-z coordinates for initial condition, x-y-z coordinates for final condition, d_y: 8 left, 8 right)
+hidden_size: 256
+num_hidden_layers: 2
+weight_std: 1  # gaussian width for LWCNMP, not used for CNMP
+min_std: 0.01
+# ---
+# CNP related parameters
+# time is the context (or query) dimension
+context_dims: [0,1,2,3,4,5,6]
+# joint angles are target dimensions
+target_dims:  [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+# just took the 5% of 5000
+
+#Max context: This refers to the maximum length of the input sequence that the model can handle. In other words, if the input sequence is 
+#longer than the max context, it will be truncated to fit the specified length. This parameter is used to balance the trade-off between 
+#model accuracy and computational efficiency. A larger max context allows the model to consider more context when making predictions, 
+#but also requires more computation and memory.
+
+#Max target: This refers to the maximum length of the output sequence that the model can produce. Like the max context, this parameter is 
+#used to balance accuracy and efficiency. A larger max target allows the model to generate longer sequences, but also requires more 
+#computation and memory.
+
+max_context: 300
+max_target: 300
+# ---
+lr: 0.0001
+batch_size: 20 #the batch size for the trainset
+max_iter: 200000 #maximum epochs for training
+save_freq: 10000
+test_freq: 10000
+
+n_basis: 20
+kernel_width: null
+y_std: 0.1
+amp: 1.0
