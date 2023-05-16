@@ -1,7 +1,7 @@
 save_folder: "save/deneme1"
 trainset_path: "./train_dataset.pt"
 testset_path: "./validate_dataset.pt"
-device: "cpu"
+device: "cuda"
 # ---
 model: "cnmp"
 in_shape: [7,16]  # (d_x: time, x-y-z coordinates for initial condition, x-y-z coordinates for final condition, d_y: 8 left, 8 right)
