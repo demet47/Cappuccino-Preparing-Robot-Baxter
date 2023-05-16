@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['cups']
+
+roboflow:
+  workspace: boazii-university
+  project: cup_place_finder
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/boazii-university/cup_place_finder/dataset/1
