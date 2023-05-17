@@ -4,7 +4,7 @@ testset_path: "./validate_dataset.pt"
 device: "cuda"
 # ---
 model: "cnmp"
-in_shape: [7,16]  # (d_x: time, x-y-z coordinates for initial condition, x-y-z coordinates for final condition, d_y: 8 left, 8 right)
+in_shape: [3,16]  # (d_x: time, x-y coordinates for initial condition, d_y: 8 left, 8 right)
 hidden_size: 256
 num_hidden_layers: 2
 weight_std: 1  # gaussian width for LWCNMP, not used for CNMP
@@ -12,9 +12,9 @@ min_std: 0.01
 # ---
 # CNP related parameters
 # time is the context (or query) dimension
-context_dims: [0,1,2,3,4,5,6]
+context_dims: [0,1,2]
 # joint angles are target dimensions
-target_dims:  [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]
+target_dims:  [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 # just took the 5% of 5000
 
 #Max context: This refers to the maximum length of the input sequence that the model can handle. In other words, if the input sequence is 
