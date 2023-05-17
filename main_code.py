@@ -2,6 +2,8 @@ import speech_recognition as sr
 from contextlib import suppress
 import pyttsx3
 import coffee_make as coffee
+from pydub import AudioSegment
+from pydub.playback import play
 
 state_counter = 0
 
@@ -16,6 +18,7 @@ def text_to_speech(text, output_file):
     # Run the engine to process the text
     engine.runAndWait()
 
+
 coffee_maker = coffee.Coffee()
 
 
@@ -28,7 +31,7 @@ with suppress(Exception):
     mic = sr.Microphone()
 
     # set the keyword we want to detect
-  
+      
     # adjust the microphone sensitivity
     with mic as source:
         r.adjust_for_ambient_noise(source)
@@ -36,12 +39,20 @@ with suppress(Exception):
     # start listening
     print("Say something!")
     while True:
+        print("HELLOOOO 1")
+
         with mic as source:
             audio = r.listen(source)
+        
+        print("HELLOOOO 2")
 
         # use Google speech recognition to transcribe the audio
         try:
+            print("HELLOOOO 3")
+
             text = r.recognize_google(audio)
+            print("HELLOOOO 4")
+
             print("You said: " + text)
             
             # check if the keyword is in the recognized text
@@ -50,6 +61,8 @@ with suppress(Exception):
                 baxter_response = "Hi there, so nice to have you here! Could you give me the honour of acquiring your name?"
                 response_recording = "baxter_greeting.wav"
                 text_to_speech(baxter_response, response_recording)
+                audio = AudioSegment.from_file(response_recording, format='wav')
+                play(audio)
                 state_counter = state_counter + 1
                 print("In state: ", state_counter - 1)
 
@@ -57,6 +70,8 @@ with suppress(Exception):
                 baxter_response = f"Welcome to the best cappuccino stand in the world {text}. I need to learn your sugar preference before I get started. Would you like low sugar coffee or high sugar coffee?"
                 response_recording = "baxter_sugar_request.wav"
                 text_to_speech(baxter_response, response_recording)
+                audio = AudioSegment.from_file(response_recording, format='wav')
+                play(audio)
                 state_counter = state_counter + 1
                 print("In state: ", state_counter - 1)
 
@@ -65,6 +80,8 @@ with suppress(Exception):
                     baxter_response = "What a healthy choice congratulations! It will be ready in a minute."
                     response_recording = "baxter_preparation_initalization_low_milk.wav"
                     text_to_speech(baxter_response, response_recording)
+                    audio = AudioSegment.from_file(response_recording, format='wav')
+                    play(audio)
                     state_counter = state_counter + 1
                     print("In state: ", state_counter - 1)
                     coffee_maker.prepare(low_sugar = True)
@@ -73,6 +90,8 @@ with suppress(Exception):
                     baxter_response = "Please beware, sugar is not that healthy a choice. It will be ready in a minute."
                     response_recording = "baxter_preparation_initalization_high_milk.wav"
                     text_to_speech(baxter_response, response_recording)
+                    audio = AudioSegment.from_file(response_recording, format='wav')
+                    play(audio)
                     state_counter = state_counter + 1
                     coffee_maker.prepare(low_sugar = False)
                     print("In state: ", state_counter - 1)
@@ -80,6 +99,8 @@ with suppress(Exception):
                     baxter_response = "I couldn't undestand. Could you please say merely high sugar or low sugar?"
                     response_recording = "baxter_clarification_sugar.wav"
                     text_to_speech(baxter_response, response_recording)
+                    audio = AudioSegment.from_file(response_recording, format='wav')
+                    play(audio)
                     print("In state: ", state_counter)
 
 
@@ -87,3 +108,6 @@ with suppress(Exception):
             print("Sorry, I didn't understand that.")
         except sr.RequestError:
             print("Sorry, something went wrong with the API request.")
+
+
+

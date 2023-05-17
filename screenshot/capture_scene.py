@@ -8,8 +8,6 @@ class Capture:
     def __init__(self):
 
 # Load the model
-        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-
         self.pipeline = rs.pipeline()
         self.config = rs.config()
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
