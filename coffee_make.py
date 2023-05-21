@@ -36,7 +36,7 @@ class Coffee:
             return
         #TODO: give the coordinates of cup to cnmp trained model and receive a trajectory
         model = models.CNP((3, 16), 256, 2, 0.01)
-        state_dict = torch.load("./trained_models/cnp.pt")
+        state_dict = torch.load("./colors-lab codes/train_scripts/save/deneme1/model.pt")
         model.load_state_dict(state_dict["model_state_dict"])
         model.eval()
         data = torch.load("initial_data/trajectoriessalimdemet.pt") #TODO: orient to our case

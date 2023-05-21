@@ -1,6 +1,6 @@
 save_folder: "save/deneme1"
-trainset_path: "./train_dataset.pt"
-testset_path: "./validate_dataset.pt"
+trainset_path: "../../carry_data/train/train.pt"
+testset_path: "../../carry_data/val/val.pt"
 device: "cuda"
 # ---
 model: "cnmp"
@@ -30,7 +30,7 @@ max_context: 300
 max_target: 300
 # ---
 lr: 0.0001
-batch_size: 20 #the batch size for the trainset
+batch_size: 50 #the batch size for the trainset
 max_iter: 200000 #maximum epochs for training
 save_freq: 10000
 test_freq: 10000
