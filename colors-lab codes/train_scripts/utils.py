@@ -99,7 +99,6 @@ def save_checkpoint(model, optimizer, iteration, loss, save_path, aliases=["late
     wandb.log_artifact(artifact, aliases=aliases)
     model.to(wandb.config["device"]).train()
 
-
 def load_checkpoint_from_wandb():
     # you should initialize the wandb run with the respective
     # run_id before calling this function
@@ -108,6 +107,8 @@ def load_checkpoint_from_wandb():
     artifact_dir = artifact.download()
     checkpoint = torch.load(os.path.join(artifact_dir, "model.pt"))
     return checkpoint
+
+'''
 
 def interpolateJointData(trajectory, num_of_steps_expected):
     return np.append(trajectory, np.tile(trajectory[-1], ((num_of_steps_expected - len(trajectory)), 1)))
@@ -191,3 +192,6 @@ def form_pt_dictionary_from_csv_dataset():
 
 
 form_pt_dictionary_from_csv_dataset()
+
+
+'''

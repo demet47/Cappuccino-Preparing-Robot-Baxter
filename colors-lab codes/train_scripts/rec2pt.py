@@ -22,7 +22,7 @@ normalizeTime = bool(int(sys.argv[3]))
 print(normalizeTime)
 data = {}
 for file in os.listdir(folder):
-    if file.endswith(".txt") and (file != "deneme8-r2-c1.txt"):
+    if file.endswith(".csv"):
         path = os.path.join(folder, file)
         data[file] = convert(path, normalizeTime)
 print(data)
