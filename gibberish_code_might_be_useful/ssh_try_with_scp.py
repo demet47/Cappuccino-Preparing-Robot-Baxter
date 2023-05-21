@@ -1,6 +1,6 @@
 import subprocess
 
-localpath = "initial_data/trajectoriessalimdemet.pt"
-remotepath = "/home/ruser/trajectoriessalimdemet.pt"
+localpath = "C:\\Users\\dmtya\\OneDrive\\Masaüstü\\Graduation Project\\Cappuccino-Preparing-Robot-Baxter\\output.csv"
+remotepath = "/home/output.csv"
 
 subprocess.run(["scp", localpath, remotepath])
