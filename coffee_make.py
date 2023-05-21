@@ -2,6 +2,7 @@ import screenshot.capture_scene as ss
 from roboflow import Roboflow
 import models
 import torch
+import subprocess
 
 
 class Coffee:
@@ -54,7 +55,7 @@ class Coffee:
                 ]
             ]))
         #TODO: save the trajectory in proper format as in the lab
-        
+        subprocess.call(["python", "other_code.py"]) #example code to run bash command
         #TODO: make the robot execute this saved trajectories
         if(low_sugar):
             #TODO: make the robot execute the low sugar trjectory file
