@@ -6,10 +6,11 @@ import pygame
 import time
 
 
-state_counter = 0
+state_counter = 2
 bool_name = False
 #initiate coffee maker
 coffee_maker = coffee.Coffee()
+
 
 
 def __text_to_speech__(text, output_file):

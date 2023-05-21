@@ -12,12 +12,12 @@ class Capture:
         self.config = rs.config()
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         self.counter = 0
-
+        self.pipeline.start(self.config)
 
     def take_ss(self):
-        image_name = './screenshots/image_' + str(self.counter) +'.png'
+        flag = False
+        image_name = 'image_' + str(self.counter) +'.png'
         try:
-            self.pipeline.start(self.config)
             while True:
                 frames = self.pipeline.wait_for_frames()
                 color_frame = frames.get_color_frame()
@@ -25,8 +25,12 @@ class Capture:
                     continue
 
                 color_image = np.asanyarray(color_frame.get_data())
-
-                cv2.imwrite(image_name, color_image)
+                
+                if(flag == False):
+                   flag = True
+                   continue
+                
+                cv2.imwrite("./screenshot/screenshots/" + image_name, color_image)
                 self.counter = self.counter + 1
                 
                 #if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -39,7 +43,8 @@ class Capture:
 
                 break
         finally:
-            self.pipeline.stop()
+            #self.pipeline.stop()
+            m = 3
         return image_name
 
 
