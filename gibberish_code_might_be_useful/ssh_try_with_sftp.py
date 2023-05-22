@@ -9,9 +9,8 @@ ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
 server = "79.123.176.144" # server ip address
 username = "ruser"
 password = "rethink" #TODO: carry these to a environment variable file
-localpath = "C:\\Users\\dmtya\\OneDrive\\Masaüstü\\Graduation Project\\Cappuccino-Preparing-Robot-Baxter\\output.csv"
-remotepath = "/home/output.csv"
-
+localpath = "C:/Users/dmtya/Graduation Project/Cappuccino-Preparing-Robot-Baxter/output.csv"
+remotepath = "/home/ruser/output.csv"
 
 ssh.connect(server, username=username, password=password)
 sftp = ssh.open_sftp()
