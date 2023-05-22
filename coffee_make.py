@@ -8,7 +8,7 @@ import numpy as np
 
 class Coffee:
     def __init__(self):
-        self.screen = ss.Capture()
+        #self.screen = ss.Capture()
         self.restriction_upper = 0
         self.restriction_lower = 0
         self.restriction_left = 0
@@ -21,7 +21,7 @@ class Coffee:
             return x,y
 
     def prepare(self, low_sugar):
-        ss_name = self.screen.take_ss() #name of the screen shot .png file
+        ss_name = "image_0.png" #self.screen.take_ss() #name of the screen shot .png file
 
         # below we give the image recognition model this image name and receive the coordinates for cup
         rf = Roboflow(api_key="o03639Rjl20zIjHrKB4v")
@@ -57,8 +57,9 @@ class Coffee:
         record = np.vstack((headers,values))
 
         np.savetxt('output.csv', record, delimiter=',', fmt='%s')
+        subprocess.call(["python", "./ssh_send_with_sftp.py", "output.csv"], shell=True)
+        #subprocess.call(["ssh", "ruser@79.123.176.144"], shell=True)
         #TODO: save the trajectory in proper format as in the lab
-        subprocess.call(["python", "other_code.py"]) #example code to run bash command
         #TODO: make the robot execute this saved trajectories
         if(low_sugar):
             #TODO: make the robot execute the low sugar trjectory file

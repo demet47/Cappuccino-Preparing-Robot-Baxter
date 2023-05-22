@@ -6,7 +6,7 @@ import pygame
 import time
 
 
-state_counter = 2
+state_counter = 0
 bool_name = False
 #initiate coffee maker
 coffee_maker = coffee.Coffee()
