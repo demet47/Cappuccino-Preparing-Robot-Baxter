@@ -4,15 +4,15 @@ import models
 import torch
 import subprocess
 import numpy as np
-
+import main_code as voice
+import time
+import os
+from dotenv import load_dotenv
 
 class Coffee:
     def __init__(self):
         #self.screen = ss.Capture()
-        self.restriction_upper = 0
-        self.restriction_lower = 0
-        self.restriction_left = 0
-        self.restriction_right = 0
+        self.index = 0
 
     def __get_location__(self, prediction_dictionary):
         for box in prediction_dictionary['predictions']:
@@ -20,20 +20,7 @@ class Coffee:
             y = box["y"]
             return x,y
 
-    def prepare(self, low_sugar):
-        ss_name = "image_0.png" #self.screen.take_ss() #name of the screen shot .png file
-
-        # below we give the image recognition model this image name and receive the coordinates for cup
-        rf = Roboflow(api_key="o03639Rjl20zIjHrKB4v")
-        project = rf.workspace("boazii-university").project("cup_place_finderv2")
-        dataset = project.version(1).download("yolov5")
-        model = project.version(dataset.version).model
-        pred = model.predict("./screenshot/screenshots/" + ss_name, confidence=70, overlap=30).json()
-        x,_ = self.__get_location__(pred)
-        if x == None:
-            print("Error detecting the bounding boxes.")
-            return
-        #TODO: give the coordinates of cup to cnmp trained model and receive a trajectory
+    def __produce_trajectory__(self, x, y): #TODO: entegrate here x and y
         model = models.CNP((3, 16), 256, 2, 0.01)
         state_dict = torch.load("./colors-lab codes/train_scripts/save/deneme1/model.pt", map_location=torch.device('cpu'))
         model.load_state_dict(state_dict["model_state_dict"])
@@ -56,17 +43,55 @@ class Coffee:
         values = np.hstack((times,values))
         record = np.vstack((headers,values))
 
-        np.savetxt('output.csv', record, delimiter=',', fmt='%s')
-        subprocess.call(["python", "./ssh_send_with_sftp.py", "output.csv"], shell=True)
-        #subprocess.call(["ssh", "ruser@79.123.176.144"], shell=True)
-        #TODO: save the trajectory in proper format as in the lab
-        #TODO: make the robot execute this saved trajectories
+        file_name = "output_" + self.index + ".csv"
+        self.index = self.index + 1
+        np.savetxt(file_name, record, delimiter=',', fmt='%s')
+        return file_name
+
+
+    def prepare(self, low_sugar):
+        
+        load_dotenv()
+        
+        ss_name = "image_0.png" #self.screen.take_ss() #name of the screen shot .png file TODO
+
+        # below we give the image recognition model this image name and receive the coordinates for cup
+        rf = Roboflow(api_key=os.getenv("API_KEY"))
+        project = rf.workspace(os.getenv("API_WORKSPACE")).project(os.getenv("API_PROJECT"))
+        dataset = project.version(1).download("yolov5")
+        model = project.version(dataset.version).model
+        pred = model.predict("./screenshot/screenshots/" + ss_name, confidence=70, overlap=30).json()
+        x,y = self.__get_location__(pred)
+        if x == None:
+            print("Error detecting the bounding boxes.")
+            return
+        #TODO: give the coordinates of cup to cnmp trained model and receive a trajectory
+        
+        output_file_name = self.__produce_trajectory__(x,y)
+
+        subprocess.call(["python", "./ssh_send_with_sftp.py", output_file_name], shell=True)
         if(low_sugar):
-            #TODO: make the robot execute the low sugar trjectory file
-            a = ""
+            command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/low_sugar_part_1.csv"
+            subprocess.call(["python", "./execute_remote.py", command], shell=True)
+            text = "Milk mixer please."
+            outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
+            voice.__text_to_speech__(text, outfile) #TODO:erase
+            voice.__display_sound__(outfile)
+            time.sleep(4)
+            command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/low_sugar_part_2.csv"            
+            subprocess.call(["python", "./execute_remote.py", command], shell=True)
         else:
-            #TODO: make the robot execute the high sugar trajectory file
-            b = ""
+            command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_1.csv"
+            subprocess.call(["python", "./execute_remote.py", command], shell=True)
+            text = "Milk mixer please."
+            outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
+            voice.__text_to_speech__(text, outfile) #TODO:erase
+            voice.__display_sound__(outfile)
+            time.sleep(4)
+            command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
+            subprocess.call(["python", "./execute_remote.py", command], shell=True)
+
+            
 
 
 # BELOW IS A SAMPLE CODE TO CALL A PYTHON EXECUTABLE FILE AND RUN IT
