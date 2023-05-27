@@ -3,6 +3,12 @@ import os
 
 import torch
 
+'''
+INPUT PARAMETERS:
+- input 1: input folder name. This code takes all trajectory data files with .csv extension and collects them as a .pt data file
+- input 2: output file name.
+'''
+
 
 def convert(path, normalizeTime=False):
     with open(path, "r") as f:

@@ -1,4 +1,4 @@
-import screenshot.capture_scene as ss
+import capture_scene as ss
 from roboflow import Roboflow
 import models
 import torch
@@ -43,7 +43,7 @@ class Coffee:
         values = np.hstack((times,values))
         record = np.vstack((headers,values))
 
-        file_name = "output_" + self.index + ".csv"
+        file_name = "./trajectories/output_" + self.index + ".csv"
         self.index = self.index + 1
         np.savetxt(file_name, record, delimiter=',', fmt='%s')
         return file_name
@@ -53,14 +53,14 @@ class Coffee:
         
         load_dotenv()
         
-        ss_name = "image_0.png" #self.screen.take_ss() #name of the screen shot .png file TODO
+        ss_name = self.screen.take_ss() #name of the screen shot .png file TODO
 
         # below we give the image recognition model this image name and receive the coordinates for cup
         rf = Roboflow(api_key=os.getenv("API_KEY"))
         project = rf.workspace(os.getenv("API_WORKSPACE")).project(os.getenv("API_PROJECT"))
         dataset = project.version(1).download("yolov5")
         model = project.version(dataset.version).model
-        pred = model.predict("./screenshot/screenshots/" + ss_name, confidence=70, overlap=30).json()
+        pred = model.predict("./image_captures/" + ss_name, confidence=70, overlap=30).json()
         x,y = self.__get_location__(pred)
         if x == None:
             print("Error detecting the bounding boxes.")
@@ -90,17 +90,3 @@ class Coffee:
             time.sleep(4)
             command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
-
-            
-
-
-# BELOW IS A SAMPLE CODE TO CALL A PYTHON EXECUTABLE FILE AND RUN IT
-'''
-if any(key in text.lower() for key in keywords):
-            # if keyword in text.lower():
-                # do something here, like play a sound or send a notification
-                # os.system("aplay /usr/share/sounds/alsa/Front_Center.wav")
-                with open("other_code.py", "r") as f:
-                    exec(f.read())
-                print("Detected keyword: " + keyword)
-'''

@@ -30,7 +30,7 @@ class Capture:
                    flag = True
                    continue
                 
-                cv2.imwrite("./screenshot/screenshots/" + image_name, color_image)
+                cv2.imwrite("./image_captures/" + image_name, color_image)
                 self.counter = self.counter + 1
                 
                 #if cv2.waitKey(1) & 0xFF == ord('q'):
