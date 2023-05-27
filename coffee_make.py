@@ -51,8 +51,10 @@ class Coffee:
         std = std.detach()
 
         query = torch.cat((traj[0][:, [0]], torch.asarray([x,y]*traj.shape[1]).reshape(traj.shape[1],2)), dim=1)
-
-        predicted_trajectory = model(observation=traj[:, [0, 1, traj.shape[1]-2, traj.shape[1]-1], :],
+        #TODO: beware, here since there are two arms, for better prediction there should be a check for which direction it is classified and choose one accordingly
+        #by default, we chose carry_data_3.csv
+        traj_time = traj.shape[1]
+        predicted_trajectory = model(observation=traj[:, [i for i in range(0,20)]+[i for i in range(traj_time - 20, traj_time-1)], :],
             target=query.unsqueeze(0))
         values = predicted_trajectory[0].squeeze(0).detach().numpy()
         headers = np.array(["time","left_s0","left_s1","left_e0","left_e1","left_w0","left_w1","left_w2","left_gripper","right_s0","right_s1","right_e0","right_e1","right_w0","right_w1","right_w2","right_gripper"])
@@ -113,7 +115,6 @@ class Coffee:
             time.sleep(4)
             command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
-
 
 a = Coffee()
 a.prepare(True)
