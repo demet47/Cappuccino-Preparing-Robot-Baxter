@@ -21,7 +21,7 @@ class Coffee:
             y = box["y"]
             return x,y
 
-    def __text_to_speech__(text, output_file):
+    def __text_to_speech__(self,text, output_file):
         # Initialize the pyttsx3 engine
         tts = gTTS(
             text=text,
@@ -31,7 +31,7 @@ class Coffee:
 
 
 
-    def __display_sound__(response_recording):
+    def __display_sound__(self,response_recording):
         pygame.mixer.music.load(response_recording)
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy():
@@ -117,4 +117,4 @@ class Coffee:
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
 
 a = Coffee()
-a.prepare(True)
+a.prepare(Tr)
