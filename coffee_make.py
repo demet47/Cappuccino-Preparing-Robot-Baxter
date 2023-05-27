@@ -116,5 +116,4 @@ class Coffee:
             command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
 
-a = Coffee()
-a.prepare(Tr)
+            
