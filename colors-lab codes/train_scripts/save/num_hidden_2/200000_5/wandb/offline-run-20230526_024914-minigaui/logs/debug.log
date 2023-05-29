@@ -1,0 +1,25 @@
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Current SDK version is 0.15.2
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Configure stats pid to 42188
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Loading settings from /home/colors/.config/wandb/settings
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Loading settings from /home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter/colors-lab codes/train_scripts/wandb/settings
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'colors-lab codes/train_scripts/train.py', 'program': '/home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter/colors-lab codes/train_scripts/train.py'}
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_setup.py:_flush():76] Applying login settings: {'mode': 'offline'}
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:_log_setup():507] Logging user logs to save/200000_5/wandb/offline-run-20230526_024914-minigaui/logs/debug.log
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:_log_setup():508] Logging internal logs to save/200000_5/wandb/offline-run-20230526_024914-minigaui/logs/debug-internal.log
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:init():547] calling init triggers
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'save_folder': 'save/200000_5', 'trainset_path': '../../carry_data/train5/train.pt', 'testset_path': '../../carry_data/val5/val.pt', 'device': 'cuda', 'model': 'cnmp', 'in_shape': [3, 16], 'hidden_size': 256, 'num_hidden_layers': 2, 'weight_std': 1, 'min_std': 0.01, 'context_dims': [0, 1, 2], 'target_dims': [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 'max_context': 300, 'max_target': 300, 'lr': 0.0001, 'batch_size': 50, 'max_iter': 200000, 'save_freq': 10000, 'test_freq': 10000, 'n_basis': 20, 'kernel_width': None, 'y_std': 0.1, 'amp': 1.0}
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:init():596] starting backend
+2023-05-26 02:49:14,046 INFO    MainThread:42188 [wandb_init.py:init():600] setting up manager
+2023-05-26 02:49:14,048 INFO    MainThread:42188 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-05-26 02:49:14,074 INFO    MainThread:42188 [wandb_init.py:init():606] backend started and connected
+2023-05-26 02:49:14,075 INFO    MainThread:42188 [wandb_init.py:init():700] updated telemetry
+2023-05-26 02:49:14,078 INFO    MainThread:42188 [wandb_init.py:init():787] starting run threads in backend
+2023-05-26 02:49:15,556 INFO    MainThread:42188 [wandb_run.py:_console_start():2158] atexit reg
+2023-05-26 02:49:15,556 INFO    MainThread:42188 [wandb_run.py:_redirect():2013] redirect: SettingsConsole.WRAP_RAW
+2023-05-26 02:49:15,557 INFO    MainThread:42188 [wandb_run.py:_redirect():2078] Wrapping output streams.
+2023-05-26 02:49:15,557 INFO    MainThread:42188 [wandb_run.py:_redirect():2103] Redirects installed.
+2023-05-26 02:49:15,557 INFO    MainThread:42188 [wandb_init.py:init():829] run started, returning control to user process
+2023-05-26 03:08:09,661 WARNING MsgRouterThr:42188 [router.py:message_loop():77] message_loop has been closed

@@ -1,0 +1,125 @@
+{
+    "os": "Linux-5.19.0-42-generic-x86_64-with-glibc2.35",
+    "python": "3.10.6",
+    "heartbeatAt": "2023-05-29T10:35:11.626864",
+    "startedAt": "2023-05-29T10:35:11.582146",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter/colors-lab codes/train_scripts/test.py",
+    "codePath": "colors-lab codes/train_scripts/test.py",
+    "git": {
+        "remote": "https://github.com/demet47/Cappuccino-Preparing-Robot-Baxter.git",
+        "commit": "f42123c731f49f81dc3a74c0d82c64d22b4face3"
+    },
+    "email": "salimtirit58@gmail.com",
+    "root": "/home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter",
+    "host": "colors-Crosshair-15-C12VE",
+    "username": "colors",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 10,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1454.508,
+        "min": 400.0,
+        "max": 4350.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1341.275,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 723.906,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1763.988,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 684.183,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1777.868,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1517.831,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1698.85,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 948.326,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1414.694,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 2700.0,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1473.101,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 2700.0,
+            "min": 400.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1034.355,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 1399.221,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 2700.0,
+            "min": 400.0,
+            "max": 3500.0
+        },
+        {
+            "current": 1388.912,
+            "min": 400.0,
+            "max": 3500.0
+        }
+    ],
+    "disk": {
+        "total": 467.8895797729492,
+        "used": 62.020957946777344
+    },
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+            "memory_total": 6439305216
+        }
+    ],
+    "memory": {
+        "total": 15.332599639892578
+    }
+}
