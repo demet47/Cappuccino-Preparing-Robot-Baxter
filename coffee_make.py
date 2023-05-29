@@ -46,9 +46,13 @@ class Coffee:
         data = torch.load("./carry_data/val/val.pt") #TODO: orient to our case
         traj = data["carry_10_3.csv"]
         traj = traj.unsqueeze(0)
+        
+        '''
         mean, std = model(observation=traj[:, :], target=traj[:, :, [0,1,2]])
         mean = mean.detach()
         std = std.detach()
+        '''
+        
 
         query = torch.cat((traj[0][:, [0]], torch.asarray([x,y]*traj.shape[1]).reshape(traj.shape[1],2)), dim=1)
         #TODO: beware, here since there are two arms, for better prediction there should be a check for which direction it is classified and choose one accordingly
@@ -116,4 +120,3 @@ class Coffee:
             command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
 
-            
