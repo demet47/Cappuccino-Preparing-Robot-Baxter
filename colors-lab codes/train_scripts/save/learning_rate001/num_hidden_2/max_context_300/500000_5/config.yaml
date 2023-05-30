@@ -1,8 +1,8 @@
 !!python/object:wandb.sdk.wandb_config.Config
 _artifact_callback: !!python/object/apply:builtins.getattr
 - &id001 !!python/object:wandb.sdk.wandb_run.Run
-  _attach_id: 9uqj40zs
-  _init_pid: 7627
+  _attach_id: lyn3fvkj
+  _init_pid: 14024
   _is_finished: false
 - _config_artifact_callback
 _callback: !!python/object/apply:builtins.getattr
@@ -113,8 +113,8 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
   _Settings__preprocessing_warnings: {}
   _Settings__unexpected_args: !!set {}
   _Settings__validation_warnings: {}
-  _Settings_start_datetime: &id004 2023-05-29 14:53:25.953376
-  _Settings_start_time: 1685361205.953376
+  _Settings_start_datetime: &id004 2023-05-29 15:48:06.548009
+  _Settings_start_time: 1685364486.5480094
   _args: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
     _Property__failed_validation: false
@@ -675,7 +675,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 11
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: 1685361205.953376
+    _value: 1685364486.5480094
     name: _start_time
   _stats_join_assets: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -746,7 +746,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 9
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: 7627
+    _value: 14024
     name: _stats_pid
   _stats_sample_rate_seconds: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1596,7 +1596,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
     - !!python/name:wandb.sdk.wandb_settings._validate_run_id ''
-    _value: 9uqj40zs
+    _value: lyn3fvkj
     name: run_id
   run_job_type: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false

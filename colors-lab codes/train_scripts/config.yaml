@@ -1,4 +1,4 @@
-save_folder: "save/learning_rate001/num_hidden_2/max_context_300/500000_5"
+save_folder: "save/learning_rate0005/num_hidden_2/max_context_300/500000_5"
 trainset_path: "../../carry_data/train5/train.pt"
 testset_path: "../../carry_data/val5/val.pt"
 device: "cuda"
@@ -29,7 +29,7 @@ target_dims:  [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 max_context: 300
 max_target: 300
 # ---
-lr: 0.001
+lr: 0.0005
 batch_size: 50 #the batch size for the trainset
 max_iter: 500000 #maximum epochs for training
 save_freq: 10000
