@@ -28,10 +28,16 @@ VOICE FILES HARDCODED:
 TRAJECTORY FILES HARDCODED:
 - ../trajectories/baxter_greet.csv
 - ../trajectories/baxter_farewell.csv
-- ../trajectories/low_sugar_part_1.csv
-- ../trajectories/low_sugar_part_2.csv
-- ../trajectories/high_sugar_part_1.csv
-- ../trajectories/high_sugar_part_2.csv
+- ../trajectories/low_sugar_part_1.csv #TODO:ERASE
+- ../trajectories/low_sugar_part_2.csv #TODO:ERASE
+- ../trajectories/high_sugar_part_1.csv #TODO:ERASE
+- ../trajectories/high_sugar_part_2.csv #TODO:ERASE
+- ../trajectories/put_nescafe.csv #TODO:ADD
+- ../trajectories/put_hot_water.csv #TODO:ADD
+- ../trajectories/put_sugar.csv #TODO:ADD
+- ../trajectories/request_mixer.csv #TODO:ADD
+- ../trajectories/mixer.csv #TODO:ADD
+- ../trajectories/put_milk.csv #TODO:ADD
 PS: *_sugar_part_2.csv files include the serving gesture at the end, mixer grip and util at the beggining
 
 
