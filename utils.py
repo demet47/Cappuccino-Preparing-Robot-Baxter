@@ -45,14 +45,22 @@ def data_per_trajectory(folder_name, normalize):
         for i in range(0, length):
             j = np.append(j, ext)
             p = np.append(p, traj[:,1:3][-1])
-        if(j.shape[0] != max_size): #TODO: WHYYY
-            j = j.reshape(j.shape[0]//16, 16)
+       
+        j = j.reshape(16, j.size//16)
         train_joints.append(j)
         train_n.append(max_size)
         time = np.linspace(0,1, max_size)
         train_t.append(time)
-        if(p.shape[0] != max_size):
-            p = p.reshape(p.shape[0]//2, 2)
+        p = p.reshape(p.size//2, 2)
         train_p.append(p)
 
     return train_joints, train_n, train_t, train_p
+    
+    #for trajectory in list_of_trajectories:
+        
+
+
+
+
+a,b,c,d = data_per_trajectory("C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/carry_data/train", True)
+b = 3

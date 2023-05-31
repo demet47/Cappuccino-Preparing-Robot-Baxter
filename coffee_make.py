@@ -40,9 +40,9 @@ class Coffee:
 
     def __produce_trajectory__(self, x, y): #TODO: entegrate here x and y
         model = models.CNP((3, 16), 256, 2, 0.01)
-        state_dict = torch.load("./colors-lab codes/save/deneme1/model.pt", map_location=torch.device('cpu'))
-        model.load_state_dict(state_dict["model_state_dict"])
-        model.eval()
+        #state_dict = torch.load("./colors-lab codes/train_scripts/save/deneme1/model.pt", map_location=torch.device('cpu'))
+        #model.load_state_dict(state_dict["model_state_dict"])
+        #model.eval()
         data = torch.load("./carry_data/val/val.pt") #TODO: orient to our case
         traj = data["carry_10_3.csv"]
         traj = traj.unsqueeze(0)
@@ -96,7 +96,7 @@ class Coffee:
         
         
         
-        output_file_name = self.__produce_trajectory__(1,2) #self.__produce_trajectory__(x,y)
+        output_file_name = self.__produce_trajectory__(1,2) #TODO:self.__produce_trajectory__(x,y)
 
         subprocess.call(["python", "./ssh_send_with_sftp.py", output_file_name], shell=True)
         if(low_sugar):
@@ -120,3 +120,5 @@ class Coffee:
             command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/high_sugar_part_2.csv"            
             subprocess.call(["python", "./execute_remote.py", command], shell=True)
 
+a = Coffee()
+a.prepare(True)

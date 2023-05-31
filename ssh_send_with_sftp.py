@@ -13,9 +13,9 @@ ssh.load_host_keys(os.path.expanduser(os.path.join("~", ".ssh", "known_hosts")))
 server = os.getenv("BAXTER_IP_ADDRESS") # server ip address
 username = os.getenv("SSH_USERNAME")
 password = os.getenv("SSH_PASSWORD") #TODO: carry these to a environment variable file
-localpath = "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/trajectories/output.csv"
+localpath = "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/trajectories/output_1.csv"
 remotepath = "/home/ruser/trajectories/" + sys.argv[1]
-command_to_run_on_remote = "cd alper_workspace; source activate_env.sh; nohup rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/output.csv"
+command_to_run_on_remote = "cd alper_workspace; source activate_env.sh; nohup rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/output_1.csv"
 
 
 ssh.connect(server, username=username, password=password)
