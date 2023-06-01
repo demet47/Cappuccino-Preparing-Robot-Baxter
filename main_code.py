@@ -6,7 +6,7 @@ import pygame
 import time
 import subprocess
 
-state_counter = 2
+state_counter = 0
 bool_name = False
 #initiate coffee maker
 coffee_maker = coffee.Coffee()
@@ -15,8 +15,8 @@ name = ""
 '''
 VOICE FILES HARDCODED:
 - ./sound_files/baxter_greeting.mp3
-- ./sound_files/baxter_preparation_initalization_low_milk.mp3
-- ./sound_files/baxter_preparation_initalization_high_milk.mp3
+- ./sound_files/baxter_preparation_initalization_no_sugar.mp3
+- ./sound_files/baxter_preparation_initalization_sugar.mp3
 - ./sound_files/baxter_clarification_sugar.mp3
 - ./sound_files/non-comprehending_baxter.mp3"
 - ./sound_files/baxter_api_error.mp
@@ -28,17 +28,12 @@ VOICE FILES HARDCODED:
 TRAJECTORY FILES HARDCODED:
 - ../trajectories/baxter_greet.csv
 - ../trajectories/baxter_farewell.csv
-- ../trajectories/low_sugar_part_1.csv #TODO:ERASE
-- ../trajectories/low_sugar_part_2.csv #TODO:ERASE
-- ../trajectories/high_sugar_part_1.csv #TODO:ERASE
-- ../trajectories/high_sugar_part_2.csv #TODO:ERASE
 - ../trajectories/put_nescafe.csv #TODO:ADD
 - ../trajectories/put_hot_water.csv #TODO:ADD
 - ../trajectories/put_sugar.csv #TODO:ADD
 - ../trajectories/request_mixer.csv #TODO:ADD
 - ../trajectories/mixer.csv #TODO:ADD
 - ../trajectories/put_milk.csv #TODO:ADD
-PS: *_sugar_part_2.csv files include the serving gesture at the end, mixer grip and util at the beggining
 
 
 VOICE FILES NON-HARDCODED:
@@ -117,7 +112,7 @@ with suppress(Exception):
 
             elif(state_counter == 1):
                 name = text
-                baxter_response = f"Welcome to the best cappuccino stand in the world {name}. I need to learn your sugar preference before I get started. Would you like low sugar coffee or high sugar coffee?"
+                baxter_response = f"Welcome to the best cappuccino stand in the world {name}. I need to learn your sugar preference before I get started. Would you like sugar in your coffee?"
                 response_recording = "./sound_files/baxter_sugar_request.mp3"
                 __text_to_speech__(baxter_response, response_recording)
                 __display_sound__(response_recording)
@@ -128,25 +123,25 @@ with suppress(Exception):
                 bool_name = False
 
             elif((state_counter == 2)):
-                if(text.__contains__("low sugar")):
+                if(text.__contains__("no")):
                     baxter_response = "What a healthy choice congratulations! It will be ready in a minute." #TODO:erase
-                    response_recording = "./sound_files/baxter_preparation_initalization_low_milk.mp3" #TODO:erase
+                    response_recording = "./sound_files/baxter_preparation_initalization_no_sugar.mp3" #TODO:erase
                     __text_to_speech__(baxter_response, response_recording) #TODO:erase
                     __display_sound__(response_recording)
                     state_counter = state_counter + 1
                     print("In state: ", state_counter - 1)
                     coffee_maker.prepare(low_sugar = True)
                     #TODO: Low sugar preparation
-                elif(text.__contains__("high sugar")):
+                elif(text.__contains__("yes")):
                     baxter_response = "Please beware, sugar is not that healthy a choice. It will be ready in a minute." #TODO:erase
-                    response_recording = "./sound_files/baxter_preparation_initalization_high_milk.mp3" #TODO:erase
+                    response_recording = "./sound_files/baxter_preparation_initalization_sugar.mp3" #TODO:erase
                     __text_to_speech__(baxter_response, response_recording) #TODO:erase
                     __display_sound__(response_recording)
                     state_counter = state_counter + 1
                     coffee_maker.prepare(low_sugar = False)
                     print("In state: ", state_counter - 1)
                 else:
-                    baxter_response = "I couldn't undestand. Could you please say merely high sugar or low sugar?" #TODO:erase
+                    baxter_response = "I couldn't undestand. Could you please say merely yes or no?" #TODO:erase
                     response_recording = "./sound_files/baxter_clarification_sugar.mp3" #TODO:erase
                     __text_to_speech__(baxter_response, response_recording) #TODO:erase
                     __display_sound__(response_recording)
@@ -166,7 +161,7 @@ with suppress(Exception):
                 __text_to_speech__(baxter_response, response_recording)
                 __display_sound__(response_recording)
                 time.sleep(10)
-                state_counter += 1
+                state_counter = 0
                 print("In state: ", state_counter - 1)
         except sr.UnknownValueError:
             baxter_response = f"Sorry, I didn't understand that." #TODO:erase

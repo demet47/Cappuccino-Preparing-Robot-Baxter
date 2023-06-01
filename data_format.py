@@ -2,6 +2,14 @@ import csv
 import numpy as np
 import os
 
+observation_right = np.load("./train_joints_right.npy")
+observation_left = np.load("./train_joints_left.npy")
+
+default_position_left = np.load("./")#path to default left
+default_position_right = np.load("./")
+
+index = 0
+
 def convert(path, normalize):
     with open(path, "r") as f:
         # first line is the header, and the second line does not follow 100hz, so skip.
@@ -12,9 +20,6 @@ def convert(path, normalize):
         for i in range(0,len(lines)):
             lines[i][0] = lines[i][0] / max
     return lines
-
-
-#folder = "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/carry_data/train" #sys.argv[1]
 
 def path_to_list_of_trajectories(folder, normalize):
     data = []
@@ -53,3 +58,20 @@ def data_per_trajectory(folder_name, normalize):
         train_p.append(p)
 
     return train_joints, train_n, train_t, train_p
+
+#takes a (time_length, number_of_joints) sized array of trajectory information
+def trajectory_list_to_csv(traj_list, left):
+    traj_time = traj_list.shape[1]
+    headers = np.array(["time","left_s0","left_s1","left_e0","left_e1","left_w0","left_w1","left_w2","left_gripper"])
+
+    values = traj_list[0].squeeze(0).detach().numpy()
+    headers = headers.reshape(1,17)
+
+    time_len = values.shape[0]
+    times = np.arange(0.45, 0.45 + time_len * 0.01, 0.01).reshape(-1, 1)
+    values = np.hstack((times,values))
+    record = np.vstack((headers,values))
+
+    file_name = "./trajectories/output_" + str(index) + ".csv"
+    index = index + 1
+    np.savetxt(file_name, record, delimiter=',', fmt='%s')
