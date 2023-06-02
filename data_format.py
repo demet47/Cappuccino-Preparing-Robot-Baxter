@@ -4,11 +4,11 @@ import os
 import pandas as pd
 
 
-observation_right = pd.read_csv("./carry_data/train/carry_8_1.csv").to_numpy()[:,11:]
-observation_left = pd.read_csv("./carry_data/train/carry_1_1.csv").to_numpy()[:,3:11]
+observation_right = np.load("./train_joints_right.npy")
+observation_left = np.load("./train_joints_left.npy")
 
-default_position_left = np.load("./")#path to default left
-default_position_right = np.load("./")
+default_position_left = np.load("left_arm_default_data.npy")
+default_position_right = np.load("right_arm_default_data.npy")
 
 index = 0
 
