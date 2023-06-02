@@ -38,18 +38,25 @@ def data_per_trajectory(folder_name, normalize):
     train_p = []
 
     for traj in list_of_trajectories:
-        j = traj[:,3:]
-        p = traj[:,1:3]
-        ext = traj[-1, 3:]
-        length = max_size - traj.shape[0]
-        for i in range(0, length):
-            j = np.append(j, ext)
-        j = j.reshape(16,j.size//16)
-        train_joints.append(j)
+        j = traj[:,3:] # joint angles
+        p = traj[0,1:3] # x, y coordinates
+        ext = traj[-1, 3:] # extension last joint angles
+        length = max_size - traj.shape[0] # length of extension
+        for _ in range(0, length):
+            j = np.append(j, [ext], axis=0)
+        # j = j.reshape(16,j.size//16)
+        train_joints.append(j.T)
         train_n.append(max_size)
         time = np.linspace(0,1, max_size)
         train_t.append(time)
-        p = traj[:,1:3][-1]
         train_p.append(p)
 
     return train_joints, train_n, train_t, train_p
+
+# /home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter/carry_data/train1
+# a,b,c,d = data_per_trajectory('./carry_data/train1', True)
+
+# print(a[0].shape)
+# print(b[0])
+# print(c[0])
+# print(d[0])
