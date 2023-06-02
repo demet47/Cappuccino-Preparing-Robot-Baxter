@@ -12,7 +12,7 @@ class Capture:
         self.config = rs.config()
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         self.counter = 0
-        self.pipeline.start(self.config)
+        #self.pipeline.start(self.config)
 
     def take_ss(self):
         flag = False
@@ -33,17 +33,19 @@ class Capture:
                 cv2.imwrite("./image_captures/" + image_name, color_image)
                 self.counter = self.counter + 1
                 
-                #if cv2.waitKey(1) & 0xFF == ord('q'):
-                #    break
+                #BELOW CODE IS CODE TO TRIGGER SS VIA PRESS ON KEYBOARD. WE'RE NOT USING THIS IN LATEST VERSION OF PROJECT
+                '''
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
                     
-                #if cv2.waitKey(1) & 0xFF == ord('s'):
-                #    cv2.imwrite('./screenshots/image_' + str(counter) +'.png', color_image)
-                #    counter = counter + 1
-                #    print("Image saved!")
-
+                if cv2.waitKey(1) & 0xFF == ord('s'):
+                    cv2.imwrite('./screenshots/image_' + str(counter) +'.png', color_image)
+                    counter = counter + 1
+                    print("Image saved!")
+                '''
+                
                 break
         finally:
-            #self.pipeline.stop()
             m = 3
         return image_name
 
