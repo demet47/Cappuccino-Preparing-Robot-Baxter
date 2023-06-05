@@ -1,8 +1,8 @@
 !!python/object:wandb.sdk.wandb_config.Config
 _artifact_callback: !!python/object/apply:builtins.getattr
 - &id001 !!python/object:wandb.sdk.wandb_run.Run
-  _attach_id: ywvb1041
-  _init_pid: 17700
+  _attach_id: 4jw11vs9
+  _init_pid: 26368
   _is_finished: false
 - _config_artifact_callback
 _callback: !!python/object/apply:builtins.getattr
@@ -16,7 +16,7 @@ _items:
   - 0
   - 1
   - 2
-  device: cuda
+  device: cpu
   hidden_size: 256
   in_shape:
   - 3
@@ -113,8 +113,8 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
   _Settings__preprocessing_warnings: {}
   _Settings__unexpected_args: !!set {}
   _Settings__validation_warnings: {}
-  _Settings_start_datetime: &id004 2023-05-29 18:01:33.487763
-  _Settings_start_time: 1685372493.4877627
+  _Settings_start_datetime: &id004 2023-06-03 20:11:10.912661
+  _Settings_start_time: 1685812270.9126608
   _args: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
     _Property__failed_validation: false
@@ -279,10 +279,10 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     _is_policy: false
     _preprocessor: null
     _source: !!python/object/apply:wandb.sdk.wandb_settings.Source
-    - 1
+    - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: null
+    _value: true
     name: _except_exit
   _executable: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -296,7 +296,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: /usr/bin/python3
+    _value: C:\Users\dmtya\AppData\Local\Programs\Python\Python37\python.exe
     name: _executable
   _extra_http_headers: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -562,7 +562,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: Linux-5.19.0-42-generic-x86_64-with-glibc2.35
+    _value: Windows-10-10.0.19041-SP0
     name: _os
   _platform: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -576,7 +576,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 1
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: linux
+    _value: windows
     name: _platform
   _python: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -590,7 +590,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: 3.10.6
+    _value: 3.7.6rc1
     name: _python
   _runqueue_item_id: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -675,7 +675,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 11
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: 1685372493.4877627
+    _value: 1685812270.9126608
     name: _start_time
   _stats_join_assets: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -746,7 +746,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 9
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: 17700
+    _value: 26368
     name: _stats_pid
   _stats_sample_rate_seconds: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1186,7 +1186,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: colors-Crosshair-15-C12VE
+    _value: LAPTOP-QP6BB920
     name: host
   ignore_globs: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1426,7 +1426,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: /home/colors/Desktop/Cappuccino-Preparing-Robot-Baxter/colors-lab codes/train_scripts/train.py
+    _value: train.py
     name: program
   program_relpath: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1440,7 +1440,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: colors-lab codes/train_scripts/train.py
+    _value: colors-lab codes\train_scripts\train.py
     name: program_relpath
   project: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1596,7 +1596,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
     - !!python/name:wandb.sdk.wandb_settings._validate_run_id ''
-    _value: ywvb1041
+    _value: 4jw11vs9
     name: run_id
   run_job_type: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1722,7 +1722,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 1
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: ~/.config/wandb/settings
+    _value: ~\.config\wandb\settings
     name: settings_system
   settings_workspace: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -1947,7 +1947,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: true
+    _value: false
     name: symlink
   sync_dir: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false
@@ -2074,7 +2074,7 @@ _settings: !!python/object:wandb.sdk.wandb_settings.Settings
     - 8
     _validator:
     - !!python/name:wandb.sdk.wandb_settings.helper ''
-    _value: colors
+    _value: dmtya
     name: username
   wandb_dir: !!python/object:wandb.sdk.wandb_settings.Property
     _Property__failed_preprocessing: false

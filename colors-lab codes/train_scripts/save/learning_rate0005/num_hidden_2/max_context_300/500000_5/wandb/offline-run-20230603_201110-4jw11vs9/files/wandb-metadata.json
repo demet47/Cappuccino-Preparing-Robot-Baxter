@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.19041-SP0",
+    "python": "3.7.6rc1",
+    "heartbeatAt": "2023-06-03T17:11:11.908633",
+    "startedAt": "2023-06-03T17:11:10.912661",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "train.py",
+    "codePath": "colors-lab codes\\train_scripts\\train.py",
+    "git": {
+        "remote": "https://github.com/demet47/Cappuccino-Preparing-Robot-Baxter.git",
+        "commit": "5866fb404ec046119c868b0b7630ed2174833516"
+    },
+    "email": "dmtyayla@gmail.com",
+    "root": "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter",
+    "host": "LAPTOP-QP6BB920",
+    "username": "dmtya",
+    "executable": "C:\\Users\\dmtya\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1494.0,
+        "min": 0.0,
+        "max": 1992.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1494.0,
+            "min": 0.0,
+            "max": 1992.0
+        }
+    ],
+    "disk": {
+        "total": 254.32159805297852,
+        "used": 234.01955795288086
+    },
+    "gpu": "NVIDIA GeForce MX250",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce MX250",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 15.818649291992188
+    }
+}

@@ -1,0 +1,1 @@
+To run the custom_visualize_in_pybullet.py with a table, put the files located in table_object_pybullet folder into the location you get when running _pybullet_data.getDataPath()_ function.

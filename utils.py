@@ -14,7 +14,8 @@ def convert(path, normalize):
     return lines
 
 
-#folder = "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/carry_data/train" #sys.argv[1]
+# folder = "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/carry_data/train" 
+# sys.argv[1]
 
 def path_to_list_of_trajectories(folder, normalize):
     data = []
@@ -29,7 +30,7 @@ def path_to_list_of_trajectories(folder, normalize):
     return np.array(data), max_size
 
 
-#normalized times. Extended length elements, extension done with the termination values
+# normalized times. Extended length elements, extension done with the termination values
 def data_per_trajectory(folder_name, normalize):
     list_of_trajectories, max_size = path_to_list_of_trajectories(folder_name, normalize)
     train_joints = []
@@ -56,7 +57,7 @@ def data_per_trajectory(folder_name, normalize):
 
     return train_joints, train_n, train_t, train_p
     
-    #for trajectory in list_of_trajectories:
+    # for trajectory in list_of_trajectories:
         
 
 

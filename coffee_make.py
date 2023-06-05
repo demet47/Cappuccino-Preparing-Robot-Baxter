@@ -147,49 +147,51 @@ class Coffee:
 
 
     def prepare(self, low_sugar):
-        
-        load_dotenv()
+        try:
+            load_dotenv()
 
-        ss_name = self.screen.take_ss() #name of the screen shot .png file
+            ss_name = self.screen.take_ss() #name of the screen shot .png file
 
-        # below we give the image recognition model this image name and receive the coordinates for cup
-        rf = Roboflow(api_key=os.getenv("API_KEY"))
-        project = rf.workspace(os.getenv("API_WORKSPACE")).project(os.getenv("API_PROJECT"))
-        dataset = project.version(1).download("yolov5")
-        model = project.version(dataset.version).model
-        pred = model.predict("./image_captures/" + ss_name, confidence=70, overlap=30).json()
-        x,y = self.__get_location__(pred)
-        if x == None:
-            print("Error detecting the bounding boxes.")
-            return
-        
-        prediction = self.__produce_trajectory__(x,y)
-        output_file_name = data_format.trajectory_list_to_csv(prediction.T) #TODO:self.__produce_trajectory__(x,y)
+            # below we give the image recognition model this image name and receive the coordinates for cup
+            rf = Roboflow(api_key=os.getenv("API_KEY"))
+            project = rf.workspace(os.getenv("API_WORKSPACE")).project(os.getenv("API_PROJECT"))
+            dataset = project.version(1).download("yolov5")
+            model = project.version(dataset.version).model
+            pred = model.predict("./image_captures/" + ss_name, confidence=70, overlap=30).json()
+            x,y = self.__get_location__(pred)
+            if x == None:
+                print("Error detecting the bounding boxes.")
+                return 1
+            
+            prediction = self.__produce_trajectory__(x,y)
+            output_file_name = data_format.trajectory_list_to_csv(prediction.T) #TODO:self.__produce_trajectory__(x,y)
 
-        subprocess.call(["python", "./ssh_send_with_sftp.py", output_file_name], shell=True)
-        if(low_sugar):
-            self.__execute_remote__("put_nescafe.csv")
-            self.__execute_remote__("put_hot_water.csv")
-            self.__execute_remote__("request_mixer.csv")
-            text = "Milk mixer please."
-            outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
-            self.__text_to_speech__(text, outfile) #TODO:erase
-            self.__display_sound__(outfile)
-            time.sleep(5) #TIME IT TAKES FOR US TO GIVE MIZER TO BAXTER
-            self.__display_sound__("mixer.csv")
-            self.__display_sound__("put_milk.csv")
-        else:
-            self.__execute_remote__("put_nescafe.csv")
-            self.__execute_remote__("put_hot_water.csv")
-            self.__execute_remote__("put_sugar.csv")
-            self.__execute_remote__("request_mixer.csv")
-            text = "Milk mixer please."
-            outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
-            self.__text_to_speech__(text, outfile) #TODO:erase
-            self.__display_sound__(outfile)
-            time.sleep(5) #TIME IT TAKES FOR US TO GIVE MIZER TO BAXTER
-            self.__execute_remote__("put_milk.csv")
-
+            subprocess.call(["python", "./ssh_send_with_sftp.py", output_file_name], shell=True)
+            if(low_sugar):
+                self.__execute_remote__("put_nescafe.csv")
+                self.__execute_remote__("put_hot_water.csv")
+                self.__execute_remote__("request_mixer.csv")
+                text = "Milk mixer please."
+                outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
+                self.__text_to_speech__(text, outfile) #TODO:erase
+                self.__display_sound__(outfile)
+                time.sleep(5) #TIME IT TAKES FOR US TO GIVE MIZER TO BAXTER
+                self.__display_sound__("mixer.csv")
+                self.__display_sound__("put_milk.csv")
+            else:
+                self.__execute_remote__("put_nescafe.csv")
+                self.__execute_remote__("put_hot_water.csv")
+                self.__execute_remote__("put_sugar.csv")
+                self.__execute_remote__("request_mixer.csv")
+                text = "Milk mixer please."
+                outfile = "./sound_files/mixer_request_from_baxter.mp3" #TODO:erase
+                self.__text_to_speech__(text, outfile) #TODO:erase
+                self.__display_sound__(outfile)
+                time.sleep(5) #TIME IT TAKES FOR US TO GIVE MIZER TO BAXTER
+                self.__execute_remote__("put_milk.csv")
+            return 0
+        except:
+            return 2
 
 a = Coffee()
 a.__produce_trajectory__(0.6, 0.6)

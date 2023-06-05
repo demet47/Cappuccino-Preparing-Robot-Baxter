@@ -30,7 +30,7 @@ class Capture:
                    flag = True
                    continue
                 
-                cv2.imwrite("./image_captures/" + image_name, color_image)
+                cv2.imwrite("./image_captures/" + image_name, color_image) #TODO: this directory may create error
                 self.counter = self.counter + 1
                 
                 #BELOW CODE IS CODE TO TRIGGER SS VIA PRESS ON KEYBOARD. WE'RE NOT USING THIS IN LATEST VERSION OF PROJECT
@@ -52,7 +52,5 @@ class Capture:
 
 
 
-#HOW SCREENCAPTURE IS TAKEN: an rgb camera view pops up on the screen when we run the code.
+#HOW SCREENCAPTURE IS TAKEN FOR COMMENTED OUT SECTION: an rgb camera view pops up on the screen when we run the code.
 #you have to press s while your mouse is on the screen to save a capture.
-
-#TODO: we will change this trigger event to our purpose

@@ -4,11 +4,11 @@ import os
 import pandas as pd
 
 
-observation_right = np.load("./train_joints_right.npy")
-observation_left = np.load("./train_joints_left.npy")
+observation_right = np.load(os.getcwd().replace("\\", "/") + "/meta_trajectories/train_joints_right.npy")
+observation_left = np.load(os.getcwd().replace("\\", "/") + "/meta_trajectories/train_joints_left.npy")
 
-default_position_left = np.load("left_arm_default_data.npy")
-default_position_right = np.load("right_arm_default_data.npy")
+default_position_left = np.load(os.getcwd().replace("\\", "/") + "/meta_trajectories/left_arm_default_data.npy")
+default_position_right = np.load(os.getcwd().replace("\\", "/") + "/meta_trajectories/right_arm_default_data.npy")
 
 index = 0
 

@@ -26,4 +26,4 @@ print("STD ERR: ", serr.read().decode())
 sftp.close()
 ssh.close()
 
-#command_to_run_on_remote_0 += "; echo -e \"\\x03\""
+#command_to_run_on_remote_0 += "; echo -e \"\\x03\"" to append ctrl + C to the end of cmd

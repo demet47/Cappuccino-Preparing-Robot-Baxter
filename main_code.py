@@ -128,18 +128,30 @@ with suppress(Exception):
                     response_recording = "./sound_files/baxter_preparation_initalization_no_sugar.mp3" #TODO:erase
                     __text_to_speech__(baxter_response, response_recording) #TODO:erase
                     __display_sound__(response_recording)
-                    state_counter = state_counter + 1
-                    print("In state: ", state_counter - 1)
-                    coffee_maker.prepare(low_sugar = True)
+                    return_flag = coffee_maker.prepare(low_sugar = True)
+                    if(return_flag == 0):
+                        state_counter = state_counter + 1
+                        print("In state: ", state_counter - 1)
+                    else:
+                        baxter_response = "Woops! Something went wrong. Can you repeat your sugar preference?" 
+                        response_recording = "./sound_files/baxter_prepare_error_recovery.mp3"
+                        __text_to_speech__(baxter_response, response_recording)
+                        __display_sound__(response_recording)
                     #TODO: Low sugar preparation
                 elif(text.__contains__("yes")):
                     baxter_response = "Please beware, sugar is not that healthy a choice. It will be ready in a minute." #TODO:erase
                     response_recording = "./sound_files/baxter_preparation_initalization_sugar.mp3" #TODO:erase
                     __text_to_speech__(baxter_response, response_recording) #TODO:erase
                     __display_sound__(response_recording)
-                    state_counter = state_counter + 1
-                    coffee_maker.prepare(low_sugar = False)
-                    print("In state: ", state_counter - 1)
+                    return_flag = coffee_maker.prepare(low_sugar = False)
+                    if(return_flag == 0):
+                        state_counter = state_counter + 1
+                        print("In state: ", state_counter - 1)
+                    else:
+                        baxter_response = "Woops! Something went wrong. Can you repeat your sugar preference?" 
+                        response_recording = "./sound_files/baxter_prepare_error_recovery.mp3"
+                        __text_to_speech__(baxter_response, response_recording)
+                        __display_sound__(response_recording)
                 else:
                     baxter_response = "I couldn't undestand. Could you please say merely yes or no?" #TODO:erase
                     response_recording = "./sound_files/baxter_clarification_sugar.mp3" #TODO:erase

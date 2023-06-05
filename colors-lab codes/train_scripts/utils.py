@@ -1,5 +1,4 @@
 import os
-
 import wandb
 import torch
 import yaml
@@ -109,89 +108,6 @@ def load_checkpoint_from_wandb():
     return checkpoint
 
 '''
-
 def interpolateJointData(trajectory, num_of_steps_expected):
-    return np.append(trajectory, np.tile(trajectory[-1], ((num_of_steps_expected - len(trajectory)), 1)))
-
-
-def form_pt_dictionary_from_csv_dataset():
-    Y= np.array([np.genfromtxt('./initial_data/salimdemet1_0.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet1_1.csv', delimiter=',')[1:,1:], 
-                np.genfromtxt('./initial_data/salimdemet1_2.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet1_3.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet1_4.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet2_0.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet2_1.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet1_2.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet2_3.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet2_4.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet3_0.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet3_1.csv', delimiter=',')[1:,1:], 
-                np.genfromtxt('./initial_data/salimdemet3_2.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet3_3.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet3_4.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet4_0.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet4_1.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet4_2.csv', delimiter=',')[1:,1:],
-                np.genfromtxt('./initial_data/salimdemet4_3.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet4_4.csv', delimiter=',')[1:,1:]], dtype=object)
-
-
-    v_Y = np.array([np.genfromtxt('./initial_data/salimdemet5_0.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet5_1.csv', delimiter=',')[1:,1:], 
-                    np.genfromtxt('./initial_data/salimdemet5_2.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet5_3.csv', delimiter=',')[1:,1:],
-                    np.genfromtxt('./initial_data/salimdemet5_4.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet6_0.csv', delimiter=',')[1:,1:],
-                    np.genfromtxt('./initial_data/salimdemet6_1.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet6_2.csv', delimiter=',')[1:,1:],
-                    np.genfromtxt('./initial_data/salimdemet6_3.csv', delimiter=',')[1:,1:], np.genfromtxt('./initial_data/salimdemet6_4.csv', delimiter=',')[1:,1:]], dtype=object)
-
-    length1 = len(max(Y, key=len))
-    length2 = len(max(v_Y, key=len))
-    length = max([length1,length2])
-
-    time_array = np.linspace(0.5, 0.5 + (length-1)*0.01, length)
-
-    gamma = [[43.1,20.2, 0, 88.5, 21.1,0], [33.6,9.6, 0,88.5, 21.1,0], [33.3,32.0,0,88.5, 21.1,0], [54.9,32.5,0,88.5, 21.1,0], [55.3,9.2,0,88.5, 21.1,0], [66.2,22.4,0,88.5, 21.1,0]]
-
-    X = np.array([], dtype=object)
-    for i in range(0,20): #gamma is a list type, not numpy array
-        e = gamma[i//5]
-        x_axis = np.array([np.array([t]+e, dtype=np.float32) for t in time_array], dtype=np.float32)
-        X = np.append(X, x_axis)
-        
-        
-    v_X = np.array([])
-    for i in range(0,10): #gamma is a list type, not numpy array
-        e = gamma[i//5]
-        x_axis = np.array([np.array([t]+ e, dtype=np.float32) for t in time_array], dtype=np.float32)
-        v_X = np.append(v_X, x_axis)
-
-
-    Y = np.array([interpolateJointData(element, length) for element in Y])
-    Y = Y.reshape(20,length,16).astype(np.float32)
-
-    v_X = v_X.reshape(10,length,7)
-    X = X.reshape(20, length, 7)
-
-    v_Y = np.array([interpolateJointData(element, length) for element in v_Y])
-    v_Y = v_Y.reshape(10,length, 16).astype(np.float32)
-
-    merged_array_training = np.concatenate((X, Y), axis=2)
-    merged_array_validation = np.concatenate((v_X, v_Y), axis=2)
-    merged_array_training = merged_array_training.tolist()
-    merged_array_validation = merged_array_validation.tolist()
-
-    dataset_train = {   
-        "data_0":torch.tensor(merged_array_training[0]), "data_1": torch.tensor(merged_array_training[1]), "data_2": torch.tensor(merged_array_training[2]),
-        "data_3":torch.tensor(merged_array_training[3]), "data_4": torch.tensor(merged_array_training[4]), "data_5": torch.tensor(merged_array_training[5]),
-        "data_6":torch.tensor(merged_array_training[6]), "data_7": torch.tensor(merged_array_training[7]), "data_8": torch.tensor(merged_array_training[8]),
-        "data_9":torch.tensor(merged_array_training[9]), "data_10": torch.tensor(merged_array_training[10]), "data_11": torch.tensor(merged_array_training[11]),
-        "data_12":torch.tensor(merged_array_training[12]), "data_13": torch.tensor(merged_array_training[13]), "data_14": torch.tensor(merged_array_training[14]),
-        "data_15":torch.tensor(merged_array_training[15]), "data_16": torch.tensor(merged_array_training[16]), "data_17": torch.tensor(merged_array_training[17]),
-        "data_18":torch.tensor(merged_array_training[18]), "data_19": torch.tensor(merged_array_training[19])
-                    }
-    
-    dataset_validation = {
-        "data_0":torch.tensor(merged_array_validation[0]), "data_1": torch.tensor(merged_array_validation[1]), "data_2": torch.tensor(merged_array_validation[2]),
-        "data_3":torch.tensor(merged_array_validation[3]), "data_4": torch.tensor(merged_array_validation[4]), "data_5": torch.tensor(merged_array_validation[5]),
-        "data_6":torch.tensor(merged_array_validation[6]), "data_7": torch.tensor(merged_array_validation[7]), "data_8": torch.tensor(merged_array_validation[8]),
-        "data_9":torch.tensor(merged_array_validation[9])
-    }
-
-    
-    torch.save(dataset_train, "train_dataset.pt")
-    torch.save(dataset_validation, "validate_dataset.pt")
-
-
-form_pt_dictionary_from_csv_dataset()
-
-
+    return np.append(trajectory, np.tile(trajectory[-1], ((num_of_steps_expected - len(trajectory)), 1))
 '''
