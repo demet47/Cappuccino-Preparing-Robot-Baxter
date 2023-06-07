@@ -15,7 +15,7 @@ index = 0
 def convert(path, normalize):
     with open(path, "r") as f:
         # first line is the header, and the second line does not follow 100hz, so skip.
-        lines = f.readlines()[2:]
+        lines = f.readlines()[1:]
     lines = [[float(item) for item in line.strip().split(",")] for line in lines]
     max = lines[-1][0]
     if normalize == True: 
