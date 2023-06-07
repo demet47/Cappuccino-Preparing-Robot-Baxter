@@ -12,7 +12,7 @@ class Capture:
         self.config = rs.config()
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         self.counter = 0
-        #self.pipeline.start(self.config)
+        self.pipeline.start(self.config)
 
     def take_ss(self):
         flag = False

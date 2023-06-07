@@ -57,11 +57,3 @@ def data_per_trajectory(folder_name, normalize):
 
     return train_joints, train_n, train_t, train_p
     
-    # for trajectory in list_of_trajectories:
-        
-
-
-
-
-a,b,c,d = data_per_trajectory("C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/carry_data/train", True)
-b = 3

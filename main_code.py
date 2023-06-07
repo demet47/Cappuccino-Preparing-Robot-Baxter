@@ -6,7 +6,7 @@ import pygame
 import time
 import subprocess
 
-state_counter = 0
+state_counter = 2
 bool_name = False
 #initiate coffee maker
 coffee_maker = coffee.Coffee()
@@ -105,7 +105,9 @@ with suppress(Exception):
                 response_recording = "./sound_files/baxter_greeting.mp3" #TODO: erase
                 __text_to_speech__(baxter_response, response_recording) #TODO:erase
                 __display_sound__(response_recording)
-                
+                command = "rosrun baxter_examples joint_trajectory_file_playback.py -f ./trajectories/baxter_greet.csv"
+                call_wait = subprocess.Popen(["python", "./execute_remote.py", command], shell=True)
+                call_wait.wait()
                 state_counter = state_counter + 1
                 print("In state: ", state_counter - 1)
                 bool_name = True
@@ -118,10 +120,7 @@ with suppress(Exception):
                 __display_sound__(response_recording)
                 state_counter = state_counter + 1
                 print("In state: ", state_counter - 1)
-                command = "cd alper_workspace; source activate_env.sh; rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/baxter_greet.csv"
-                subprocess.call(["python", "./execute_remote.py", command], shell=True)
                 bool_name = False
-
             elif((state_counter == 2)):
                 if(text.__contains__("no")):
                     baxter_response = "What a healthy choice congratulations! It will be ready in a minute." #TODO:erase
@@ -150,7 +149,7 @@ with suppress(Exception):
                     else:
                         baxter_response = "Woops! Something went wrong. Can you repeat your sugar preference?" 
                         response_recording = "./sound_files/baxter_prepare_error_recovery.mp3"
-                        __text_to_speech__(baxter_response, response_recording)
+                        __text_to_speech__(baxter_response, response_recording) 
                         __display_sound__(response_recording)
                 else:
                     baxter_response = "I couldn't undestand. Could you please say merely yes or no?" #TODO:erase
@@ -166,15 +165,16 @@ with suppress(Exception):
                 state_counter += 1
                 print("In state: ", state_counter - 1)
             elif((state_counter == 4) & (lower_case.__contains__("thank you"))):
-                command = "cd alper_workspace; source activate_env.sh; nohup rosrun baxter_examples joint_trajectory_file_playback.py -f ../trajectories/baxter_farewell.csv"
-                subprocess.call(["python", "./execute_remote.py", command], shell=True)
+                command = "rosrun baxter_examples joint_trajectory_file_playback.py -f ./trajectories/baxter_farewell.csv"
+                call_wait = subprocess.Popen(["python", "./execute_remote.py", command], shell=True)
+                call_wait.wait()
                 baxter_response = f"It was a pleasure serving you ." #TODO:erase
                 response_recording = "./sound_files/baxter_farewell.mp3" #TODO:erase
                 __text_to_speech__(baxter_response, response_recording)
                 __display_sound__(response_recording)
                 time.sleep(10)
-                state_counter = 0
                 print("In state: ", state_counter - 1)
+                state_counter = 0
         except sr.UnknownValueError:
             baxter_response = f"Sorry, I didn't understand that." #TODO:erase
             response_recording = "./sound_files/non-comprehending_baxter.mp3" #TODO:erase

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import wandb
 
-import models
+import pytorch_models
 import utils
 import data
 
@@ -93,7 +93,7 @@ for traj in X:
     xmax = max(traj[:][0].max(), xmax)
 
 slack = (xmax - xmin) * 0.1
-model = models.ProMP(n_dims=len(config["target_dims"]), n_basis=config["n_basis"],
+model = pytorch_models.ProMP(n_dims=len(config["target_dims"]), n_basis=config["n_basis"],
                      kernel_range=(xmin-slack, xmax+slack))
 model.learn_from_demonstrations(X.tolist(), Y.tolist())
 

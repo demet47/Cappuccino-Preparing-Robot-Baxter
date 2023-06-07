@@ -22,7 +22,7 @@ def create_baxter():
     planeId=p.loadURDF("plane.urdf")
     p.setGravity(0,0,-9.81)
     p.setRealTimeSimulation(0)
-    baxter = Manipulator(p, "./baxter_common/baxter_description/urdf/toms_baxter.urdf", position=(0,0,0.9), ik_idx=20)
+    baxter = Manipulator(p, "C:/Users/dmtya/Cappuccino-Preparing-Robot-Baxter/baxter_common/baxter_description/urdf/toms_baxter.urdf", position=(0,0,0.9), ik_idx=20)
     baxter.add_debug_text()
     joint_names = [joint_name.decode() for joint_name in baxter.names]
     return baxter, p

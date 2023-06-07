@@ -3,7 +3,7 @@ import wandb
 import torch
 import yaml
 import matplotlib.pyplot as plt
-import models
+import pytorch_models
 import numpy as np
 import torch
 
@@ -35,9 +35,9 @@ def parse_and_init(args):
 
 def create_model_from_config(config, resume=False, use_wandb=True):
     if config["model"] == "cnmp":
-        model = models.CNP(config["in_shape"], config["hidden_size"], config["num_hidden_layers"], config["min_std"])
+        model = pytorch_models.CNP(config["in_shape"], config["hidden_size"], config["num_hidden_layers"], config["min_std"])
     elif config["model"] == "lwcnmp":
-        model = models.LocallyWeightedCNP(config["in_shape"], config["hidden_size"],
+        model = pytorch_models.LocallyWeightedCNP(config["in_shape"], config["hidden_size"],
                                           config["num_hidden_layers"], config["min_std"], config["weight_std"])
     else:
         raise ValueError("Invalid model name")
