@@ -31,7 +31,4 @@ except:
 sftp.close()
 ssh.close()
 
-#command_to_run_on_remote_0 += "; echo -e \"\\x03\"" to append ctrl + C to the end of cmd
-
-#exp_path = "export PATH=/home/ruser/miniconda3/envs/ros_env/bin:/home/ruser/miniconda3/envs/ros_env/x86_64-conda-linux-gnu/sysroot/usr/bin:/home/ruser/miniconda3/condabin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3"
 
