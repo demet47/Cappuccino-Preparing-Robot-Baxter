@@ -1,5 +1,7 @@
 ## Files and Where They are User
 
+_PS: not updated_
+
 - *main_code.py*:
     - this is the script we run at the uppermost layer for the cyclic orchestration of coffee make.
     - contains voice recognition
