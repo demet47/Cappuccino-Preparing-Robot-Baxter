@@ -38,7 +38,9 @@ class Manipulator:
             self._p.enableJointForceTorqueSensor(self.id, j, 1)
         self.forces = [5000 for _ in self.joints]
 
-    def get_end_effector_pose(self): #!!!!
+
+    # returns joint space angle data for the current status of joints.
+    def get_end_effector_pose(self): 
         p, _, _, _, _,_ = self._p.getLinkState(self.id, 26, computeForwardKinematics=True)
         return p
     
@@ -52,6 +54,7 @@ class Manipulator:
     def add_line(self, start, end, color=[1., .5, .5], lineWidth=5):
         return self._p.addUserDebugLine(start, end, lineColorRGB=color, lineWidth=lineWidth)
 
+    # sets position of end effector providing x,y,z real world domain coordinates of end effector location.
     def set_cartesian_position(self, position, orientation=None, t=None, sleep=False, traj=False): #the position here is in cartesian coordinate system
         target_joints = self._p.calculateInverseKinematics(
             bodyUniqueId=self.id,
@@ -60,6 +63,8 @@ class Manipulator:
             targetOrientation=orientation)
         self.set_joint_position(target_joints, t=t, sleep=sleep, traj=traj)
 
+    # moves the arm from the current location to the provided x,y,z real world domain target location.
+    # difference from the above function is that this provides a smoother movement
     def move_in_cartesian(self, position, orientation=None, t=1.0, sleep=False, ignore_force=False):
         N = int(t * 240)
         current_position = self.get_end_effector_pose()
@@ -75,7 +80,8 @@ class Manipulator:
             joints_followed.append(self.get_joint_position())
         return joints_followed
 
-            
+    # sets the position of the joints. Mostly called implicitely inside this class's functions.
+    # domain for the position variable is x,y,z real world
     def set_joint_position(self, position, velocity=None, t=None, sleep=False, traj=False):
         assert len(self.joints) > 0
         if traj:
@@ -130,11 +136,10 @@ class Manipulator:
             forces=torque)
         self._waitsleep(t, sleep)
 
-    # TODO: make this only joint position, joint velocity etc.
     def get_joint_states(self):
         return self._p.getJointStates(self.id, self.joints)
 
-    def get_joint_position(self): #!!!!
+    def get_joint_position(self):
         joint_states = self.get_joint_states()
         return [joint[0] for joint in joint_states]
 
